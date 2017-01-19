@@ -9,4 +9,7 @@ sudo n stable
 sudo npm install -y pm2 -g
 
 # Install Mongoose
-sudo npm install -y mongoose 
+sudo npm install mongoose 
+
+# Install Mocha (globally)
+sudo npm install --global mocha
