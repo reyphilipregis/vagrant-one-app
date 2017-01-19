@@ -24,7 +24,7 @@ Vagrant.configure("2") do |config|
 
   # Run common shell provision
   config.vm.provision "shell",
-      path: "/Users/reyphilipregis/Documents/virtualmachines/pet-project-vms/scripts/ubuntu-common.sh"
+      path: "https://raw.githubusercontent.com/reyphilipregis/vagrant-one-app/master/scripts/ubuntu-common.sh"
 
   # Define the servers
   config.vm.define "web" do |web|
@@ -33,7 +33,7 @@ Vagrant.configure("2") do |config|
   	web.vm.network "private_network", ip: "192.168.10.2"
     
   	web.vm.provision "shell",
-  		path: "/Users/reyphilipregis/Documents/virtualmachines/pet-project-vms/scripts/ubuntu-web.sh"
+  		path: "https://raw.githubusercontent.com/reyphilipregis/vagrant-one-app/master/scripts/ubuntu-web.sh"
   end
 
   config.vm.define "db" do |db|
@@ -41,10 +41,10 @@ Vagrant.configure("2") do |config|
   	db.vm.network "private_network", ip: "192.168.10.3"
 
     db.vm.provision "shell",
-      path: "/Users/reyphilipregis/Documents/virtualmachines/pet-project-vms/scripts/ubuntu-db.sh"
+      path: "https://raw.githubusercontent.com/reyphilipregis/vagrant-one-app/master/scripts/ubuntu-db.sh"
 
   	db.vm.provision "file",
-  		source: "/Users/reyphilipregis/Documents/virtualmachines/pet-project-vms/scripts/mongodb.service",
+  		source: "~/Documents/virtualmachines/pet-project-vms/scripts/mongodb.service",
   		destination: "/etc/systemd/system/mongodb.service"
   end
 
