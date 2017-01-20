@@ -6,6 +6,3 @@ echo "deb [ arch=amd64 ] http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3
 sudo apt-get update
 sudo apt-get install -y mongodb-org
 export LC_ALL=C
-#sudo chmod 777 /etc/systemd/system/
-#sudo touch /etc/systemd/system/mongodb.service
-#sudo chmod 7777 /etc/systemd/system/mongodb.service
