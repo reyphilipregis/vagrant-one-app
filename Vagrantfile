@@ -28,19 +28,28 @@ Vagrant.configure("2") do |config|
       path: "https://raw.githubusercontent.com/reyphilipregis/vagrant-one-app/master/scripts/ubuntu-common.sh"
 
   # Define the servers
-  config.vm.define "web" do |web|
-  	web.vm.hostname = "web-server"
-  	web.vm.network "forwarded_port", guest: 3000, host: 8080
-  	web.vm.network "private_network", ip: "192.168.10.2"
+  config.vm.define "application" do |application|
+  	application.vm.hostname = "application-server"
+  	application.vm.network "forwarded_port", guest: 3000, host: 8080
+  	application.vm.network "private_network", ip: "192.168.10.2"
     
-  	web.vm.provision "shell",
-  		path: "https://raw.githubusercontent.com/reyphilipregis/vagrant-one-app/master/scripts/ubuntu-web.sh"
+  	application.vm.provision "shell",
+  		path: "https://raw.githubusercontent.com/reyphilipregis/vagrant-one-app/master/scripts/ubuntu-application.sh"
+  end
+
+  config.vm.define "web" do |web|
+    web.vm.hostname = "web-server"
+    web.vm.network "forwarded_port", guest: 3000, host: 3000
+    web.vm.network "private_network", ip: "192.168.10.3"
+    
+    web.vm.provision "shell",
+      path: "https://raw.githubusercontent.com/reyphilipregis/vagrant-one-app/master/scripts/ubuntu-web.sh"
   end
 
   config.vm.define "db" do |db|
   	db.vm.hostname = "db-server"
     config.vm.network "forwarded_port", guest: 27017, host: 27017
-  	db.vm.network "private_network", ip: "192.168.10.3"
+  	db.vm.network "private_network", ip: "192.168.10.4"
 
     db.vm.provision "shell",
       path: "https://raw.githubusercontent.com/reyphilipregis/vagrant-one-app/master/scripts/ubuntu-db.sh"
