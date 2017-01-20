@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "ubuntu/xenial64"
+  config.vm.box = "ubuntu/trusty64"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -29,7 +29,7 @@ Vagrant.configure("2") do |config|
   # Define the servers
   config.vm.define "web" do |web|
   	web.vm.hostname = "web-server"
-  	web.vm.network "forwarded_port", guest: 80, host: 8080
+  	web.vm.network "forwarded_port", guest: 3000, host: 8080
   	web.vm.network "private_network", ip: "192.168.10.2"
     
   	web.vm.provision "shell",
@@ -38,14 +38,15 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "db" do |db|
   	db.vm.hostname = "db-server"
+    config.vm.network "forwarded_port", guest: 27017, host: 27017
   	db.vm.network "private_network", ip: "192.168.10.3"
 
     db.vm.provision "shell",
       path: "https://raw.githubusercontent.com/reyphilipregis/vagrant-one-app/master/scripts/ubuntu-db.sh"
 
-  	db.vm.provision "file",
-  		source: "~/Documents/virtualmachines/pet-project-vms/scripts/mongodb.service",
-  		destination: "/etc/systemd/system/mongodb.service"
+  	#db.vm.provision "file",
+  	#	source: "~/Documents/virtualmachines/pet-project-vms/scripts/mongodb.service",
+  	#	destination: "/etc/systemd/system/mongodb.service"
   end
 
   # Create a forwarded port mapping which allows access to a specific port
